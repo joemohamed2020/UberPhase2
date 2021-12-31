@@ -22,7 +22,7 @@ public class UserLogin {
         String password=user.get("password");
         if (userLoginServices.LogInUser(name,password)){
             try {
-                httpServletResponse.sendRedirect("/Ride?userName="+name+"&source=&dest=");
+                httpServletResponse.sendRedirect("/Ride");
             }
             catch (IOException e)
             {

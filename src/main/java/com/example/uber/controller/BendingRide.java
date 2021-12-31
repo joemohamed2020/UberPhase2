@@ -10,9 +10,9 @@ import java.util.Map;
 @RestController
 public class BendingRide {
     BendingRideServices bendingRideServices;
-
     public BendingRide(BendingRideServices bendingRideServices) {
         this.bendingRideServices = bendingRideServices;
+
     }
     @RequestMapping("/Ride")
     public void Request(@RequestParam Map<String, String> ride) {
