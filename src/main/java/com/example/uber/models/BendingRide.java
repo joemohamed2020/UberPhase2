@@ -1,27 +1,24 @@
 package com.example.uber.models;
 
-import lombok.AllArgsConstructor;
+import com.example.uber.repository.UserRepository;
+import com.sun.istack.NotNull;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Check;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.servlet.annotation.HttpConstraint;
 
 
 @NoArgsConstructor
 @Entity
 public class BendingRide {
-    static int count;
     @Id
-    int id;
     String userName;
     String source;
     String destination;
 
     public BendingRide(String userName, String source, String destination) {
-        count++;
-        id=count;
         this.userName = userName;
         this.source = source;
         this.destination = destination;

@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -18,4 +18,6 @@ public class Person {
     String password;
     String email;
     String phoneNumber;
+
+
 }

@@ -15,6 +15,10 @@ public class DriverLoginServices {
         if (driverRepository.existsById(driverName)){
             DriverData driverData=driverRepository.getById(driverName);
             if (driverData.getPassword().equals(password)){
+                if (driverData.getStatus()==0){
+                    System.out.println("Your Account Suspended");
+                    return false;
+                }
                 System.out.println("LogIn Successfully");
                 return true;
             }

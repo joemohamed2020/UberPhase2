@@ -14,7 +14,15 @@ public class BendingRideServices {
     }
     public void requestRide(String userName,String source,String dest){
         BendingRide ride=new BendingRide(userName,source,dest);
-        bendingRideRepository.save(ride);
+            if (bendingRideRepository.existsById(userName)){
+                System.out.println("You Have Already Request A Ride Please Wait...");
+            }
+            else {
+                bendingRideRepository.save(ride);
+                System.out.println("Your Request Send Please Wait...");
+            }
+        }
+
 
     }
-}
+
