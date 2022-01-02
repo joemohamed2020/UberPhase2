@@ -13,21 +13,38 @@ public class UserLoginServices {
         this.userRepository = userRepository;
     }
 
-    public boolean LogInUser(String userName,String password){
+    public String LogInUser(String userName,String password){
         if (userRepository.existsById(userName)){
             UserData userData=userRepository.getById(userName);
             if (userData.getPassword().equals(password)){
-                System.out.println("LogIn Successfully");
-                return true;
+                if (userData.getStatus()!=0) {
+                    userData.setLogIn(true);
+                    userRepository.save(userData);
+                    return "LogIn Successfully";
+                }
+                else {
+                    return "Your Account Has Been Suspended";
+                }
             }
             else{
-                System.out.println("Wrong Password!!");
+                return"Wrong Password!!";
             }
         }
         else {
-            System.out.println("UserName Not Found!!");
+            return"UserName Not Found!!";
         }
-        return false;
+    }
+
+    public String LogOut(String userName){
+        if (userRepository.existsById(userName)) {
+            UserData userData = userRepository.getById(userName);
+            userData.setLogIn(false);
+            userRepository.save(userData);
+            return "Logout successfully";
+        }
+        else {
+            return "No User Exists!";
+        }
     }
 
 }

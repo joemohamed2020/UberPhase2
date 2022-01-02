@@ -23,7 +23,7 @@ public class UserRegister {
         String password=user.get("password");
         String email=user.get("email");
         String phone=user.get("phone");
-        UserData userData=new UserData(name,password,email,phone);
+        UserData userData=new UserData(name,password,email,phone,1);
         userRegisterServices.UserRegister(userData);
     }
 }

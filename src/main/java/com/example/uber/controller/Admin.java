@@ -4,30 +4,46 @@ import com.example.uber.services.AdminServices;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Map;
 
 @RestController
 public class Admin {
     @RequestMapping("/AdminLogin")
-    public void Login(@RequestParam Map<String, String> admin, HttpServletResponse httpServletResponse){
+    public String  Login(@RequestParam Map<String, String> admin){
         String name=admin.get("name");
         String password=admin.get("password");
-        if (AdminServices.Login(name,password)){
-            try{
-                httpServletResponse.sendRedirect("/AdminMode");
-            }
-            catch (IOException e){
-                System.out.println("Error!!");
-            }
-        }
+        return AdminServices.Login(name,password);
     }
+
     @RequestMapping("/AdminMode")
-    public void VerifyDriver(@RequestParam Map<String, String> admin){
+    public String VerifyDriver(@RequestParam Map<String, String> admin){
         String name=admin.get("name");
-        AdminServices.VerifyDriver(name);
+        return AdminServices.VerifyDriver(name);
+    }
+
+    @RequestMapping("/AdminMode2")
+    public String SusDriver(@RequestParam Map<String, String> admin){
+        String name=admin.get("name");
+        return AdminServices.SusDriver(name);
+    }
+
+    @RequestMapping("/AdminMode3")
+    public String VerifyUser(@RequestParam Map<String, String> admin){
+        String name=admin.get("name");
+        return AdminServices.VerifyUser(name);
+    }
+
+    @RequestMapping("/AdminMode4")
+    public String SusUser(@RequestParam Map<String, String> admin){
+        String name=admin.get("name");
+        return AdminServices.SusUser(name);
+    }
+
+    @RequestMapping("/AdminLogout")
+    public String Logout(@RequestParam Map<String, String> admin){
+        String name=admin.get("name");
+        return AdminServices.Logout();
+
     }
 
 

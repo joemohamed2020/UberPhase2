@@ -14,6 +14,12 @@ public class UserRegisterServices {
         this.userRepository = userRepository;
     }
     public void UserRegister(UserData userData){
-        userRepository.save(userData);
+        if (userRepository.existsById(userData.getUserName())) {
+            System.out.println("this Driver is already exists!");
+        }
+        else {
+            userRepository.save(userData);
+            System.out.println("Registered Successfully");
+        }
     }
 }

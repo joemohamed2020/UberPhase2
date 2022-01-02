@@ -17,18 +17,16 @@ public class UserLogin {
         this.userLoginServices = userLoginServices;
     }
     @RequestMapping("/UserLogin")
-    public void Login(@RequestParam Map<String, String> user, HttpServletResponse httpServletResponse) {
+    public String Login(@RequestParam Map<String, String> user) {
         String name=user.get("userName");
         String password=user.get("password");
-        if (userLoginServices.LogInUser(name,password)){
-            try {
-                httpServletResponse.sendRedirect("/Ride");
-            }
-            catch (IOException e)
-            {
-                System.out.println("Error!!");
-            }
-        }
+        return userLoginServices.LogInUser(name,password);
 
+    }
+
+    @RequestMapping("/UserLogOut")
+    public String LogOut(@RequestParam Map<String,String> user){
+        String name=user.get("userName");
+        return userLoginServices.LogOut(name);
     }
 }

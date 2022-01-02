@@ -14,10 +14,12 @@ import javax.persistence.*;
 @MappedSuperclass
 public class Person {
     @Id
-    String userName;
-    String password;
-    String email;
-    String phoneNumber;
+    private String userName;
+    private String password;
+    private String email;
+    private String phoneNumber;
+    private Boolean LogIn;
+    private int status;
 
 
 }

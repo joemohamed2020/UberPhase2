@@ -9,14 +9,13 @@ import javax.persistence.Entity;
 @Entity
 
 public class DriverData extends Person {
-        String licence;
-        String nationalId;
-        int status;
+        private String licence;
+        private String nationalId;
+        private int AVGRate;
         public DriverData(String userName, String password, String email, String phoneNumber, String licence, String nationalId,int status) {
-                super(userName, password, email, phoneNumber);
+                super(userName, password, email, phoneNumber,false,status);
                 this.licence = licence;
                 this.nationalId = nationalId;
-                this.status=status;
 
         }
 

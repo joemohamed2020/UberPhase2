@@ -6,31 +6,41 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DriverLoginServices {
-    DriverRepository driverRepository;
+    private DriverRepository driverRepository;
     @Autowired
     public DriverLoginServices(DriverRepository driverRepository) {
         this.driverRepository = driverRepository;
     }
-    public boolean LogInDriver(String driverName,String password){
+    public String LogInDriver(String driverName,String password){
         if (driverRepository.existsById(driverName)){
             DriverData driverData=driverRepository.getById(driverName);
             if (driverData.getPassword().equals(password)){
                 if (driverData.getStatus()==0){
-                    System.out.println("Your Account Suspended");
-                    return false;
+                    return  "Your Account Suspended";
                 }
-                System.out.println("LogIn Successfully");
-                return true;
+                driverData.setLogIn(true);
+                driverRepository.save(driverData);
+                return "LogIn Successfully";
             }
             else{
-                System.out.println("Wrong Password!!");
+                return "Wrong Password!!";
 
             }
         }
         else {
-            System.out.println("DriverName Not Found!!");
+            return"DriverName Not Found!!";
         }
-    return false;
+    }
+    public String LogOut(String driverName){
+        if (driverRepository.existsById(driverName)) {
+            DriverData driverData = driverRepository.getById(driverName);
+            driverData.setLogIn(false);
+            driverRepository.save(driverData);
+            return "Logout Successfully";
+        }
+        else{
+            return "No User Exists!";
+        }
     }
 
 }
