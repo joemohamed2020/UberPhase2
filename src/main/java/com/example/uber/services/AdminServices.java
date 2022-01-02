@@ -1,24 +1,29 @@
 package com.example.uber.services;
 
 import com.example.uber.models.DriverData;
+import com.example.uber.models.Event;
 import com.example.uber.models.UserData;
 import com.example.uber.repository.DriverRepository;
+import com.example.uber.repository.EventsRepository;
 import com.example.uber.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Driver;
+import java.util.List;
 
 @Service
 public class AdminServices {
     private static boolean login = false;
     private static DriverRepository driverRepository;
     private static UserRepository userRepository;
+    private static EventsRepository eventsRepository;
 
     @Autowired
-    public AdminServices(DriverRepository driverRepository, UserRepository userRepository) {
+    public AdminServices(DriverRepository driverRepository, UserRepository userRepository, EventsRepository eventsRepository) {
         this.userRepository = userRepository;
         this.driverRepository = driverRepository;
+        this.eventsRepository = eventsRepository;
     }
 
     public static String Login(String username, String password) {
@@ -114,4 +119,59 @@ public class AdminServices {
             return "Please LogIn First!";
         }
     }
+
+    public static String ShowPriceEvent(int rideId) {
+        if (login) {
+            int x=-1;
+            if (eventsRepository.existsByRideId(rideId)) {
+                List <Event> events = eventsRepository.getAllByRideId(rideId);
+                for (int i=0;i<events.size();i++){
+                    if (events.get(i).getEventName().equals("Captain put a price")){
+                        x=i;
+                        break;
+                    }
+                }
+                if (x!=-1) {
+                    String output = "";
+                    output += "Event Name: " + events.get(x).getEventName() + ",Event time: " + events.get(x).getEventTime() + ",DriverName: " + events.get(x).getDriverName() + ",Price: " + events.get(x).getPrice() + "}";
+                    return output;
+                }
+                else {
+                    return "No Event Available";
+                }
+            } else {
+                return "No Events to This Ride";
+            }
+        } else {
+            return "Login First";
+        }
+    }
+
+    public static String ShowUserAction(int rideId) {
+        if (login) {
+            int x=-1;
+            if (eventsRepository.existsByRideId(rideId)) {
+                List <Event> events = eventsRepository.getAllByRideId(rideId);
+                for (int i=0;i<events.size();i++){
+                    if (events.get(i).getEventName().equals("User Accept the offer")){
+                        x=i;
+                        break;
+                    }
+                }
+                if (x!=-1) {
+                    String output = "";
+                    output += "Event Name: " + events.get(x).getEventName() + ",Event time: " + events.get(x).getEventTime() + ",UserName: " + events.get(x).getUserName() + "}";
+                    return output;
+                }
+                else {
+                    return "No Event Available";
+                }
+            } else {
+                return "No Events to This Ride";
+            }
+        } else {
+            return "Login First";
+        }
+    }
+
 }

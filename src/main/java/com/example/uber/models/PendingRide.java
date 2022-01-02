@@ -14,6 +14,8 @@ import javax.persistence.*;
 @Entity
 public class PendingRide {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String userName;
     private String source;
     private String destination;

@@ -46,5 +46,18 @@ public class Admin {
 
     }
 
+    @RequestMapping("/AdminShowPriceEvent")
+    public String ShowPriceEvent(@RequestParam Map<String, String> admin){
+        String rideId=admin.get("name");
+        return AdminServices.ShowPriceEvent(Integer.parseInt(rideId));
+
+    }
+
+    @RequestMapping("/AdminShowUserAction")
+    public String ShowUserAction(@RequestParam Map<String, String> admin){
+        String rideId=admin.get("name");
+        return AdminServices.ShowUserAction(Integer.parseInt(rideId));
+
+    }
 
 }

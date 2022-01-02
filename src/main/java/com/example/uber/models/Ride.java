@@ -13,7 +13,6 @@ import javax.persistence.Id;
 @Entity
 public class Ride {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     private String userName;
     private String driverName;
@@ -22,7 +21,8 @@ public class Ride {
     private int price;
     private int rate;
 
-    public Ride(String userName, String driverName, String source, String destination, int price) {
+    public Ride(int id,String userName, String driverName, String source, String destination, int price) {
+        this.id=id;
         this.userName = userName;
         this.driverName = driverName;
         this.source = source;
