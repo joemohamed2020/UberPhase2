@@ -46,18 +46,17 @@ public class Admin {
 
     }
 
-    @RequestMapping("/AdminShowPriceEvent")
-    public String ShowPriceEvent(@RequestParam Map<String, String> admin){
-        String rideId=admin.get("name");
-        return AdminServices.ShowPriceEvent(Integer.parseInt(rideId));
+    @RequestMapping("/AdminEvents")
+    public String ShowPriceEvent(@RequestParam Map<String, String> Ride){
+        String rideId=Ride.get("rideId");
+        String output=AdminServices.ShowPriceEvent(Integer.parseInt(rideId));
+        output+="||"+AdminServices.ShowUserAction(Integer.parseInt(rideId));
+        output+="||"+AdminServices.ShowDriverGoSource(Integer.parseInt(rideId));
+        output+="||"+AdminServices.ShowDriverGoDestination(Integer.parseInt(rideId));
+        return output;
 
     }
 
-    @RequestMapping("/AdminShowUserAction")
-    public String ShowUserAction(@RequestParam Map<String, String> admin){
-        String rideId=admin.get("name");
-        return AdminServices.ShowUserAction(Integer.parseInt(rideId));
 
-    }
 
 }

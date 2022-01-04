@@ -1,17 +1,15 @@
 package com.example.uber.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 @Setter
 @Getter
 @Entity
-public class Ride {
+public class TerminatedRide {
     @Id
     int id;
     private String userName;
@@ -21,9 +19,8 @@ public class Ride {
     private int price;
     private int rate;
     private int noPassengers;
-    private String driverStatus;
 
-    public Ride(int id,String userName, String driverName, String source, String destination, int price,int noPassengers) {
+    public TerminatedRide(int id,String userName, String driverName, String source, String destination, int price,int noPassengers) {
         this.id=id;
         this.userName = userName;
         this.driverName = driverName;
@@ -32,10 +29,10 @@ public class Ride {
         this.price = price;
         this.rate=0;
         this.noPassengers=noPassengers;
-        this.driverStatus="On My Way";
     }
 
-    public Ride() {
+
+    public TerminatedRide() {
 
     }
 }

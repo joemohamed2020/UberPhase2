@@ -153,7 +153,7 @@ public class AdminServices {
             if (eventsRepository.existsByRideId(rideId)) {
                 List <Event> events = eventsRepository.getAllByRideId(rideId);
                 for (int i=0;i<events.size();i++){
-                    if (events.get(i).getEventName().equals("User Accept the offer")){
+                    if (events.get(i).getEventName().equals("User Accept Offer")){
                         x=i;
                         break;
                     }
@@ -161,6 +161,60 @@ public class AdminServices {
                 if (x!=-1) {
                     String output = "";
                     output += "Event Name: " + events.get(x).getEventName() + ",Event time: " + events.get(x).getEventTime() + ",UserName: " + events.get(x).getUserName() + "}";
+                    return output;
+                }
+                else {
+                    return "No Event Available";
+                }
+            } else {
+                return "No Events to This Ride";
+            }
+        } else {
+            return "Login First";
+        }
+    }
+
+    public static String ShowDriverGoSource(int rideId){
+        if (login) {
+            int x=-1;
+            if (eventsRepository.existsByRideId(rideId)) {
+                List <Event> events = eventsRepository.getAllByRideId(rideId);
+                for (int i=0;i<events.size();i++){
+                    if (events.get(i).getEventName().equals("DriverArrived")){
+                        x=i;
+                        break;
+                    }
+                }
+                if (x!=-1) {
+                    String output = "";
+                    output += "Event Name: " + events.get(x).getEventName() + ",Event time: " + events.get(x).getEventTime() + ",UserName: " + events.get(x).getUserName() +",DriverName: "+events.get(x).getDriverName()+ "}";
+                    return output;
+                }
+                else {
+                    return "No Event Available";
+                }
+            } else {
+                return "No Events to This Ride";
+            }
+        } else {
+            return "Login First";
+        }
+    }
+
+    public static String ShowDriverGoDestination(int rideId){
+        if (login) {
+            int x=-1;
+            if (eventsRepository.existsByRideId(rideId)) {
+                List <Event> events = eventsRepository.getAllByRideId(rideId);
+                for (int i=0;i<events.size();i++){
+                    if (events.get(i).getEventName().equals("RideEnd")){
+                        x=i;
+                        break;
+                    }
+                }
+                if (x!=-1) {
+                    String output = "";
+                    output += "Event Name: " + events.get(x).getEventName() + ",Event time: " + events.get(x).getEventTime() + ",UserName: " + events.get(x).getUserName() +",DriverName: "+events.get(x).getDriverName()+ "}";
                     return output;
                 }
                 else {

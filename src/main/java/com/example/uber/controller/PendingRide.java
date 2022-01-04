@@ -19,7 +19,8 @@ public class PendingRide {
         String userName=ride.get("userName");
         String source=ride.get("source");
         String dest=ride.get("dest");
-        return pendingRideServices.requestRide(userName,source,dest);
+        String noPassenger=ride.get("noPassengers");
+        return pendingRideServices.requestRide(userName,source,dest,Integer.parseInt(noPassenger));
 
     }
 

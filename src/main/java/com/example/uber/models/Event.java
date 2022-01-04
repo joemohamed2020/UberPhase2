@@ -2,10 +2,15 @@ package com.example.uber.models;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.bytebuddy.asm.Advice;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Time;
+import java.time.LocalTime;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -16,13 +21,14 @@ public class Event {
     private int Id;
     private int rideId;
     private String eventName;
-    private long eventTime;
+    private String eventTime;
     private String userName;
     private String driverName;
     private int price;
     private String Action="null";
+    private String driverStatus="null";
 
-    public Event(int id,String eventName, long eventTime, String userName, String driverName, int price) {
+    public Event(int id,String eventName, String eventTime, String userName, String driverName, int price) {
         this.rideId=id;
         this.eventName = eventName;
         this.eventTime = eventTime;

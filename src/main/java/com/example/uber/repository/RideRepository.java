@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface RideRepository extends JpaRepository<Ride,Integer> {
-    List<Ride> getAllByUserName(String userName);
-    List<Ride> getAllByDriverName(String driverName);
+    Ride getAllByUserName(String userName);
+    Ride getAllByDriverName(String driverName);
+    boolean existsByDriverName(String driverName);
 }

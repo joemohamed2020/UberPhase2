@@ -18,14 +18,14 @@ public class PendingRideServices {
         this.userRepository = userRepository;
     }
 
-    public String requestRide(String userName, String source, String dest) {
+    public String requestRide(String userName, String source, String dest,int noPassengers) {
 
         if (userRepository.existsById(userName)) {
             UserData userData= userRepository.getById(userName);
             if (userData.getLogIn()) {
                 DriverData driverData = new DriverData();
-                PendingRide ride = new PendingRide(userName, source, dest);
-                if (pendingRideRepository.existsById(userData.getUserName())) {
+                PendingRide ride = new PendingRide(userName, source, dest,noPassengers);
+                if (pendingRideRepository.existsByUserName(userData.getUserName())) {
                     return  "You Have Already Request A Ride Please Wait...";
                 } else {
                     pendingRideRepository.save(ride);
@@ -40,6 +40,7 @@ public class PendingRideServices {
             return  "There is no User with This Name!";
         }
     }
+
 
 
 

@@ -1,9 +1,9 @@
 package com.example.uber.services;
 
 import com.example.uber.models.DriverData;
-import com.example.uber.models.Ride;
+import com.example.uber.models.TerminatedRide;
 import com.example.uber.repository.DriverRepository;
-import com.example.uber.repository.RideRepository;
+import com.example.uber.repository.TerminatedRideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +11,12 @@ import java.util.List;
 
 @Service
 public class MyRatesServices {
-    RideRepository rideRepository;
+    TerminatedRideRepository terminatedRideRepository;
     DriverRepository driverRepository;
 
     @Autowired
-    public MyRatesServices(RideRepository rideRepository,DriverRepository driverRepository) {
-        this.rideRepository = rideRepository;
+    public MyRatesServices(TerminatedRideRepository rideRepository, DriverRepository driverRepository) {
+        terminatedRideRepository=rideRepository;
         this.driverRepository=driverRepository;
     }
 
@@ -25,7 +25,7 @@ public class MyRatesServices {
         if(driverRepository.existsById(driverName)) {
             DriverData driverData=driverRepository.getById(driverName);
             if (driverData.getLogIn()) {
-                List<Ride> list = rideRepository.getAllByDriverName(driverName);
+                List<TerminatedRide> list = terminatedRideRepository.findAllByDriverName(driverName);
                 if (list.size() != 0) {
                     for(int i=0;i<list.size();i++){
                         output+="{UserName: "+list.get(i).getUserName()+"||Rate: "+list.get(i).getRate()+"}";

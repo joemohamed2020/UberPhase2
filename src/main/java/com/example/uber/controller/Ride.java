@@ -33,5 +33,14 @@ public class Ride {
             return "Number From 1 TO 5";
         }
     }
-
+    @RequestMapping("/Arrived")
+    public String Arrived(@RequestParam Map<String,String> driver){
+        String name=driver.get("driverName");
+        return rideServices.Arrived(name);
+    }
+    @RequestMapping("/TerminateRide")
+    public String TerminateRide(@RequestParam Map<String, String> User){
+        String name=User.get("driverName");
+        return rideServices.TerminateRide(name);
+    }
 }

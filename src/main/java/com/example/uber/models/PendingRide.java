@@ -21,10 +21,12 @@ public class PendingRide {
     private String destination;
     private String driverName;
     private int offer;
+    private int noPassengers;
 
-    public PendingRide(String userName, String source, String destination) {
+    public PendingRide(String userName, String source, String destination,int noPassengers) {
         this.userName = userName;
         this.source = source;
         this.destination = destination;
+        this.noPassengers=noPassengers;
     }
 }
